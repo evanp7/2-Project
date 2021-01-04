@@ -142,7 +142,7 @@ class Main {
   }
 
   TotalCost = TaxCalc(SubTotal);
-  
+
   // Output screen
   System.out.println("\nThank you for purchasing " + FirLasName);
   System.out.println("-----------------------------------------");
@@ -161,9 +161,8 @@ class Main {
   //Write to File
   FileWriter ordeWriter = new FileWriter("orderinfo.txt");
   for (int k=0; k<3; k++) {
-    for (int l=0; l<5; l++){
-  ordeWriter.write(itemsPurchased[k][l] + "\n");
-  }
+  ordeWriter.write(itemsPurchased[0][k] + "\n");
+  ordeWriter.write(itemsPurchased[1][k] + "\n");
     }
   ordeWriter.close();
   }
