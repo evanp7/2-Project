@@ -78,7 +78,7 @@ class Main {
 
     int numOfItems = 1;
     boolean stillBuying = true;
-    while (stillBuying && numOfItems < 5) {
+    while (stillBuying && numOfItems < 5) { //Asking again 
       System.out.println("Would you like to purchase another item? Please type 'Yes' or 'No' ");
       String Answer = input.nextLine();
         if (Answer.equals("Yes"))
@@ -104,7 +104,7 @@ class Main {
                   }
                 }
 
-            itemsPurchased[1][numOfItems] = price[itemIndex];
+            itemsPurchased[0][numOfItems] = price[itemIndex];
             
             flag = true;
             while (flag) {
