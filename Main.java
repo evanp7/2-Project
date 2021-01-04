@@ -22,10 +22,8 @@ class Main {
     double TotalCost; // This is used to hold the value of the tax calculation
     double SubTotal = 0.0; // before tax calculation
 
-    int [] quantity = new int [5];
-    double [] prices = new double [5];
     String [] items = new String [5];
-
+    int [] ItemArray = new int [5]; 
     double [][] itemsPurchased = new double[3][5];
 
     String [] item = {"MacBook Air", "PS5", "iPhone 12", "Xbox Series X", "RTX 3090"};
@@ -50,6 +48,7 @@ class Main {
       try {
         System.out.println("Please enter a corresponding number between 0 to 4 (so Macbook Air would be 0, PS5 is 1, etc)");
         itemIndex = Integer.parseInt(input.nextLine());
+        //ItemArray = item[itemIndex]
         itemsPurchased[0][0] = price[itemIndex];
         flag = false;
       }
@@ -92,7 +91,8 @@ class Main {
                 flag = false;
 
                 for (int i=0; i < numOfItems; i++) {
-                  if (item[itemIndex] == items[i]) {
+                  if (item[itemIndex].equals(items[i])) { // items[itemIndex].equals(items[i])
+									// (array[1][itemindex]!=0)
                     System.out.println("You cannot order the same item more than once.");
                     flag = true;
                   }
@@ -146,13 +146,18 @@ class Main {
   System.out.println("\nThank you for purchasing " + FirLasName);
   System.out.println("-----------------------------------------");
 
+	//for loop
+	//if qty[index] !=0, then print the name [index]  
+
   System.out.print("Price");
   for (int j=0; j<5; j++) { // Price
+	//if != 0 print
       System.out.print("\t \t" + itemsPurchased[0][j]);
     }
   System.out.println("\n");
 
   System.out.print("Quantity");
+	//if !=0 print
   for (int j=0; j<5; j++) { // Quantity
       System.out.print("\t \t" + itemsPurchased[1][j]);
     }
@@ -165,7 +170,8 @@ class Main {
   //Write to File
   FileWriter ordeWriter = new FileWriter("orderinfo.txt");
   for (int k=0; k<3; k++) {
-  ordeWriter.write(itemsPurchased[0][k] + "\n");
+		//if qty !=0 then print, otherwise continue loop
+	ordeWriter.write(itemsPurchased[0][k] + "\n");
   ordeWriter.write(itemsPurchased[1][k] + "\n");
     }
   ordeWriter.close();
