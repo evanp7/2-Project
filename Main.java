@@ -150,6 +150,7 @@ class Main {
   System.out.println("Quantity");
   for (int j=0; j<2; j++) {
       System.out.print("\t \t \t" + itemsPurchased[0][j]); //Price
+      System.out.print("\n");
       System.out.print("\t \t \t" + itemsPurchased[1][j]); //Quantity
     }
     
@@ -159,10 +160,11 @@ class Main {
   
   //Write to File
   FileWriter ordeWriter = new FileWriter("orderinfo.txt");
-  for (int k=0; k<2; k++) {
-  ordeWriter.write(itemsPurchased[0][k] + "\n");
-  orderWriter.write(itemsPurchased[1][k]);
+  for (int k=0; k<3; k++) {
+    for (int l=0; l<5; l++){
+  ordeWriter.write(itemsPurchased[k][l] + "\n");
   }
-  ordeWriter.close();
     }
+  ordeWriter.close();
   }
+}
