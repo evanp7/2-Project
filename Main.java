@@ -26,7 +26,7 @@ class Main {
     double [] prices = new double [5];
     String [] items = new String [5];
 
-    String [][] itemsPurchased = new String[5][4];
+    double [][] itemsPurchased = new double[3][5];
 
     String [] item = {"MacBook Air", "PS5", "iPhone 12", "Xbox Series X", "RTX 3090"};
     double [] price = {1299.99, 499.99, 979.99, 599.99, 1999.99};
@@ -38,20 +38,19 @@ class Main {
     String [] name = FirLasName.split("\\s");
 
     System.out.println("\nHere are the items in stock: ");
-    for (int i=0; i<5; i++) // Item list
+    for (int i=0; i<5; i++) // Item list, for loop to output all items
     {
       System.out.println(item[i]);
     }
 
     // User input for items
-    System.out.println("Please enter the item that you wish to purchase: ");
-    boolean flag = true; // for running while loop
-    while (flag) {
+    System.out.println("Please enter the item that you wish to purchase:");
+    boolean flag = true;
+    while (flag) { //Asking for which item to purchase
       try {
-        System.out.println("(Please enter a number between 0 and 4)");
+        System.out.println("Please enter a corresponding number between 0 to 4 (so Macbook Air would be 0, PS5 is 1, etc)");
         itemIndex = Integer.parseInt(input.nextLine());
-        itemsPurchased[0][0] = item[itemIndex];
-        itemsPurchased[0][1] = price[itemIndex];
+        itemsPurchased[0][0] = price[itemIndex];
         flag = false;
       }
       catch (Exception e){
@@ -61,11 +60,11 @@ class Main {
     }
     
     flag = true;
-    while (flag) {
+    while (flag) { //Asking for the quantity
       try {
         System.out.println("Please enter the quantity of the item.");
-        itemsPurchased[0][2] = Integer.parseInt(input.nextLine());
-        if (itemsPurchased[0][2].length() > 0) {
+        itemsPurchased[1][0] = Integer.parseInt(input.nextLine());
+        if (itemsPurchased[1][0] > 0) {
           flag = false;
         } else {
           System.out.println("Please enter at least 1 or greater.");
@@ -105,15 +104,14 @@ class Main {
                   }
                 }
 
-            itemsPurchased[numOfItems][1] = price[itemIndex];
-            itemsPurchased[numOfItems][0] = item[itemIndex];
+            itemsPurchased[1][numOfItems] = price[itemIndex];
             
             flag = true;
             while (flag) {
               try {
                 System.out.println("Please enter the quantity of the item.");
-                itemsPurchased[numOfItems][2] = Integer.parseInt(input.nextLine());
-                if (itemsPurchased[numOfItems][2].length() > 0) {
+                itemsPurchased[1][numOfItems] = Integer.parseInt(input.nextLine());
+                if (itemsPurchased[1][numOfItems] > 0) {
                   flag = false;
                 } else {
                   System.out.println("Please enter at least 1 or greater.");
@@ -140,31 +138,31 @@ class Main {
 
   // calculation of subtotal
   for (int i=0; i<5; i++) {
-    SubTotal = SubTotal + quantity[i] * prices[i];
+    SubTotal = SubTotal + itemsPurchased[1][i] * itemsPurchased[0][i];
   }
 
   TotalCost = TaxCalc(SubTotal);
   
-  // Output screen (writing to the file)
-  FileWriter ordeWriter = new FileWriter("orderinfo.txt");
-  orderFile.write(
-    System.out.println("\nThank you for purchasing " + FirLasName);
-    System.out.println("-----------------------------------------");
-    System.out.println("Price\t \t \tItem");
-
-    for (int j=0; j<5; j++) {
-      for (int k = 0; k < itemsPurchased[j][2].length(); k++)
-      {
-        System.out.print(prices[j]);
-        System.out.print("\t \t \t" + itemsPurchased[j][2]);
-        System.out.print("\n");
-      }
+  // Output screen
+  System.out.println("\nThank you for purchasing " + FirLasName);
+  System.out.println("-----------------------------------------");
+  System.out.println("Price");
+  System.out.println("Quantity");
+  for (int j=0; j<2; j++) {
+      System.out.print("\t \t \t" + itemsPurchased[0][j]); //Price
+      System.out.print("\t \t \t" + itemsPurchased[1][j]); //Quantity
     }
     
-    System.out.println("-----------------------------------------");
-    System.out.println("Total cost\t \t \t" + SubTotal);
-    System.out.println("After tax\t \t \t" + String.format("%.2f", TotalCost));
-  );
-  orderFile.close();
+  System.out.println("-----------------------------------------");
+  System.out.println("Total cost\t \t \t" + SubTotal);
+  System.out.println("After tax\t \t \t" + String.format("%.2f", TotalCost));
+  
+  //Write to File
+  FileWriter ordeWriter = new FileWriter("orderinfo.txt");
+  for (int k=0; k<2; k++) {
+  ordeWriter.write(itemsPurchased[0][k] + "\n");
+  orderWriter.write(itemsPurchased[1][k]);
   }
-}
+  ordeWriter.close();
+    }
+  }
