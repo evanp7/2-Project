@@ -140,20 +140,24 @@ class Main {
   for (int i=0; i<5; i++) {
     SubTotal = SubTotal + itemsPurchased[1][i] * itemsPurchased[0][i];
   }
-
   TotalCost = TaxCalc(SubTotal);
 
   // Output screen
   System.out.println("\nThank you for purchasing " + FirLasName);
   System.out.println("-----------------------------------------");
-  System.out.println("Price");
-  System.out.println("Quantity");
-  for (int j=0; j<2; j++) {
-      System.out.print("\t \t \t" + itemsPurchased[0][j]); //Price
-      System.out.print("\n");
-      System.out.print("\t \t \t" + itemsPurchased[1][j]); //Quantity
+
+  System.out.print("Price");
+  for (int j=0; j<5; j++) { // Price
+      System.out.print("\t \t" + itemsPurchased[0][j]);
     }
-    
+  System.out.println("\n");
+
+  System.out.print("Quantity");
+  for (int j=0; j<5; j++) { // Quantity
+      System.out.print("\t \t" + itemsPurchased[1][j]);
+    }
+  System.out.println("\n");
+
   System.out.println("-----------------------------------------");
   System.out.println("Total cost\t \t \t" + SubTotal);
   System.out.println("After tax\t \t \t" + String.format("%.2f", TotalCost));
