@@ -23,7 +23,6 @@ class Main {
     double SubTotal = 0.0; // before tax calculation
 
     String [] items = new String [5];
-    int [] ItemArray = new int [5]; 
     double [][] itemsPurchased = new double[3][5];
 
     String [] item = {"MacBook Air", "PS5", "iPhone 12", "Xbox Series X", "RTX 3090"};
@@ -48,7 +47,7 @@ class Main {
       try {
         System.out.println("Please enter a corresponding number between 0 to 4 (so Macbook Air would be 0, PS5 is 1, etc)");
         itemIndex = Integer.parseInt(input.nextLine());
-        //ItemArray = item[itemIndex]
+        items[0] = item[itemIndex];
         itemsPurchased[0][0] = price[itemIndex];
         flag = false;
       }
@@ -78,7 +77,7 @@ class Main {
     int numOfItems = 1;
     boolean stillBuying = true;
     while (stillBuying && numOfItems < 5) { //Asking again 
-      System.out.println("Would you like to purchase another item? Please type 'Yes' or 'No' ");
+      System.out.println("Would you like to purchase another item? Please type 'Yes' or 'No' (Case sensitive)");
       String Answer = input.nextLine();
         if (Answer.equals("Yes"))
           {
@@ -90,8 +89,8 @@ class Main {
                 itemIndex = Integer.parseInt(input.nextLine());
                 flag = false;
 
-                for (int i=0; i < numOfItems; i++) {
-                  if (item[itemIndex].equals(items[i])) { // items[itemIndex].equals(items[i])
+                for (int i=0; i<4 i++) {
+                  if (items[i].equals(itemIndex)) { // items[itemIndex].equals(items[i])
 									// (array[1][itemindex]!=0)
                     System.out.println("You cannot order the same item more than once.");
                     flag = true;
@@ -103,7 +102,7 @@ class Main {
                 flag = true;
                   }
                 }
-
+            items[numOfItems] = item[itemIndex];
             itemsPurchased[0][numOfItems] = price[itemIndex];
             
             flag = true;
@@ -141,6 +140,8 @@ class Main {
     SubTotal = SubTotal + itemsPurchased[1][i] * itemsPurchased[0][i];
   }
   TotalCost = TaxCalc(SubTotal);
+
+ System.out.println(ItemArray); // for testing8
 
   // Output screen
   System.out.println("\nThank you for purchasing " + FirLasName);
