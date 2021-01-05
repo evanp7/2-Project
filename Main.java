@@ -89,8 +89,8 @@ class Main {
                 itemIndex = Integer.parseInt(input.nextLine());
                 flag = false;
 
-                for (int i=0; i<4 i++) {
-                  if (items[i].equals(itemIndex)) { // items[itemIndex].equals(items[i])
+                for (int i=0; i<numOfItems; i++) {
+                  if (items[i].equals(item[itemIndex])) { // items[itemIndex].equals(items[i])
 									// (array[1][itemindex]!=0)
                     System.out.println("You cannot order the same item more than once.");
                     flag = true;
@@ -100,8 +100,8 @@ class Main {
               catch (Exception e){
                 System.out.println("Wrong input, please try again.");
                 flag = true;
-                  }
-                }
+              }
+            }
             items[numOfItems] = item[itemIndex];
             itemsPurchased[0][numOfItems] = price[itemIndex];
             
@@ -137,44 +137,56 @@ class Main {
 
   // calculation of subtotal
   for (int i=0; i<5; i++) {
-    SubTotal = SubTotal + itemsPurchased[1][i] * itemsPurchased[0][i];
+    itemsPurchased[2][i] = itemsPurchased[1][i] * itemsPurchased[0][i];
+  }
+
+  for (int i=0; i<5; i++) {
+    SubTotal = SubTotal + itemsPurchased[2][i];
   }
   TotalCost = TaxCalc(SubTotal);
-
- System.out.println(ItemArray); // for testing8
-
+  
   // Output screen
-  System.out.println("\nThank you for purchasing " + FirLasName);
-  System.out.println("-----------------------------------------");
+  System.out.println("\nThank you for purchasing " + name[0]);
+  System.out.println("---------------------------------------------------------------------------");
 
-	//for loop
-	//if qty[index] !=0, then print the name [index]  
+  System.out.print("Item:");
+  for (int j=0; j<5; j++) { // Item names
+    if (itemsPurchased[1][j]!=0) {
+      System.out.print("\t \t" + items[j]);
+    }
+  }
+  System.out.println("\n");
 
-  System.out.print("Price");
+  System.out.print("Price:");
   for (int j=0; j<5; j++) { // Price
-	//if != 0 print
+	  if (itemsPurchased[0][j]!=0) {
       System.out.print("\t \t" + itemsPurchased[0][j]);
     }
+  }
   System.out.println("\n");
 
-  System.out.print("Quantity");
+  System.out.print("Quantity:");
 	//if !=0 print
   for (int j=0; j<5; j++) { // Quantity
+    if (itemsPurchased[1][j]!=0) {
       System.out.print("\t \t" + itemsPurchased[1][j]);
     }
+  }
   System.out.println("\n");
 
-  System.out.println("-----------------------------------------");
+  System.out.println("---------------------------------------------------------------------------");
   System.out.println("Total cost\t \t \t" + SubTotal);
   System.out.println("After tax\t \t \t" + String.format("%.2f", TotalCost));
   
   //Write to File
   FileWriter ordeWriter = new FileWriter("orderinfo.txt");
-  for (int k=0; k<3; k++) {
-		//if qty !=0 then print, otherwise continue loop
-	ordeWriter.write(itemsPurchased[0][k] + "\n");
-  ordeWriter.write(itemsPurchased[1][k] + "\n");
+  for (int k=0; k<5; k++) {
+	  if (itemsPurchased[1][k]!=0) {
+      ordeWriter.write(items[k] + ": ");
+      ordeWriter.write(itemsPurchased[0][k] + " ");
+      ordeWriter.write(itemsPurchased[1][k] + "\n");
     }
+  }
   ordeWriter.close();
   }
 }
